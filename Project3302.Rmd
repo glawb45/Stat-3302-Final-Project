@@ -1,15 +1,15 @@
 ---
-title: "Untitled"
+title: "Holy Crop"
 output: html_document
 date: "2024-03-23"
 ---
 
 ```{r setup, include=FALSE}
 # Get the Data
-key_crop_yields <- read.csv('key_crop_yields.csv')
-fertilizer <- read.csv('cereal_crop_yield_vs_fertilizer_application.csv')
-land_use <- read.csv('land_use_vs_yield_change_in_cereal_production.csv')
-arable_land <- read.csv('arable_land_pin.csv')
+key_crop_yields <- read_csv('key_crop_yields.csv')
+fertilizer <- read_csv('cereal_crop_yield_vs_fertilizer_application.csv')
+land_use <- read_csv('land_use_vs_yield_change_in_cereal_production.csv')
+arable_land <- read_csv('arable_land_pin.csv')
 ```
 ```{r}
 fert <- fertilizer %>%
