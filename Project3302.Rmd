@@ -1,0 +1,78 @@
+---
+title: "Untitled"
+output: html_document
+date: "2024-03-23"
+---
+
+```{r setup, include=FALSE}
+# Get the Data
+key_crop_yields <- read.csv('key_crop_yields.csv')
+fertilizer <- read.csv('cereal_crop_yield_vs_fertilizer_application.csv')
+tractors <- read.csv('cereal_yields_vs_tractor_inputs_in_agriculture.csv')
+land_use <- read.csv('land_use_vs_yield_change_in_cereal_production.csv')
+arable_land <- read.csv('arable_land_pin.csv')
+```
+### Data Dictionary
+
+# `key_crop_yields.csv`
+
+|variable                         |class     |description |
+|:--------------------------------|:---------|:-----------|
+|Entity                           |character | Country or Region Name |
+|Code                             |character | Country Code (note is NA for regions/continents) |
+|Year                             |double    | Year |
+|Wheat (tonnes per hectare)       |double    | Wheat yield |
+|Rice (tonnes per hectare)        |double    | Rice Yield |
+|Maize (tonnes per hectare)       |double    | Maize yield |
+|Soybeans (tonnes per hectare)    |double    | Soybeans yield |
+|Potatoes (tonnes per hectare)    |double    | Potato yield |
+|Beans (tonnes per hectare)       |double    | Beans yield|
+|Peas (tonnes per hectare)        |double    | Peas yield |
+|Cassava (tonnes per hectare)     |double    | Cassava (yuca) yield|
+|Barley (tonnes per hectare)      |double    | Barley|
+|Cocoa beans (tonnes per hectare) |double    | Cocoa |
+|Bananas (tonnes per hectare)     |double    | Bananas |
+
+# `arable_land`
+
+|variable                                                               |class     |description |
+|:----------------------------------------------------------------------|:---------|:-----------|
+|Entity                           |character | Country or Region Name |
+|Code                             |character | Country Code (note is NA for regions/continents) |
+|Year                             |double    | Year |
+|Arable land needed to produce a fixed quantity of crops ((1.0 = 1961)) |double    | Arable land normalized to 1961 |
+
+
+# `fertilizer`
+
+|variable                                        |class     |description |
+|:-----------------------------------------------|:---------|:-----------|
+|Entity                           |character | Country or Region Name |
+|Code                             |character | Country Code (note is NA for regions/continents) |
+|Year                             |double    | Year |
+|Cereal yield (tonnes per hectare)               |double    | Cereal yield in tonnes per hectare |
+|Nitrogen fertilizer use (kilograms per hectare) |double    | Nitrogen fertilizer use kg per hectare |
+
+# `land_use`
+
+|variable                                                  |class     |description |
+|:---------------------------------------------------------|:---------|:-----------|
+|Entity                           |character | Country or Region Name |
+|Code                             |character | Country Code (note is NA for regions/continents) |
+|Year                             |double    | Year |
+|cereal yield index                                        |double    | Cereal yield index |
+|change to land area used for cereal production since 1961 |double    | Change to land area use for cereal production relative since 1961|
+|total population (gapminder)                              |double    | Total population from gapminder data |
+
+# `tractor`
+
+|variable                                              |class     |description |
+|:---------------------------------------------------------|:---------|:-----------|
+|Entity                           |character | Country or Region Name |
+|Code                             |character | Country Code (note is NA for regions/continents) |
+|Year                             |double    | Year |
+|Tractors per 100 sq km arable land                    |double    | Number of tractors per 100 sq km of arable land |
+|Cereal yield (kilograms per hectare) (kg per hectare) |double    | Cereal yield in kg per hectare |
+|Total population (Gapminder)                          |double    | Total population from gapminder |
+
+
