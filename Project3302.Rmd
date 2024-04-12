@@ -12,11 +12,11 @@ land_use <- read.csv('land_use_vs_yield_change_in_cereal_production.csv')
 arable_land <- read.csv('arable_land_pin.csv')
 ```
 ```{r}
-kcy = subset(key_crop_yields, key_crop_yields$Code == "" & key_crop_yields$Entity != "Belgium-Luxembourg" & key_crop_yields$Entity != "Ethiopia PDR" & key_crop_yields$Entity != "European Union" & key_crop_yields$Entity != "Land Locked Developing Countries" & key_crop_yields$Entity != "Least Developed Countries" & key_crop_yields$Entity != "Low Income Food Deficit Countries" & key_crop_yields$Entity != "Net Food Importing Developing Countries" & key_crop_yields$Entity != "Pacific Islands Trust Territory" & key_crop_yields$Entity != "Small island developing States" & key_crop_yields$Entity != "Sudan (former)" & key_crop_yields$Entity != "Sudan (former)")
-
-lu = subset(land_use, land_use$Code == "" & key_crop_yields$Entity != "Belgium-Luxembourg" & key_crop_yields$Entity != "Ethiopia PDR" & key_crop_yields$Entity != "European Union" & key_crop_yields$Entity != "Land Locked Developing Countries" & key_crop_yields$Entity != "Least Developed Countries" & key_crop_yields$Entity != "Low Income Food Deficit Countries" & key_crop_yields$Entity != "Net Food Importing Developing Countries" & key_crop_yields$Entity != "Pacific Islands Trust Territory" & key_crop_yields$Entity != "Small island developing States" & key_crop_yields$Entity != "Sudan (former)" & key_crop_yields$Entity != "Sudan (former)")
-
-al = subset(arable_land, arable_land$Code == "")
+fert <- fertilizer %>%
+  filter(Year %in% 1994:2013) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Asia, Central", "Australia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  group_by(Year, Entity) %>%
+  summarize(yield = `Cereal yield (tonnes per hectare)`)
 ```
 
 
