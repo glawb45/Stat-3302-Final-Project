@@ -11,6 +11,8 @@ fertilizer <- read_csv('cereal_crop_yield_vs_fertilizer_application.csv')
 land_use <- read_csv('land_use_vs_yield_change_in_cereal_production.csv')
 arable_land <- read_csv('arable_land_pin.csv')
 ```
+
+# Fertilizer
 ```{r}
 fert <- fertilizer %>%
   filter(Year %in% 1994:2013) %>%
@@ -19,6 +21,37 @@ fert <- fertilizer %>%
   summarize(yield = `Cereal yield (tonnes per hectare)`)
 ```
 
+Arable Land
+
+```{r}
+air <- arable %>%
+  filter(Year %in% 1995:2014) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Central Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Western Europe", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South-Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+    mutate(air, Entity = ifelse(Entity == "South-Eastern Asia", "South Eastern Asia", Entity)) %>%
+  group_by(Year, Entity) %>%
+  summarize(arable_land = `Arable land needed to produce a fixed quantity of crops ((1.0 = 1961))`)
+```
+
+Key Crops
+
+```{r}
+crop <- key_crop %>%
+  filter(Year %in% 1995:2014) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South-Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  mutate(crop, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
+  group_by(Year, Entity) %>%
+  summarize(wheat = `Wheat (tonnes per hectare)`,
+            rice = `Rice (tonnes per hectare)`,
+            maize = `Maize (tonnes per hectare)`,
+            soybeans = `Soybeans (tonnes per hectare)`,
+            potatoes = `Potatoes (tonnes per hectare)`,
+            beans = `Beans (tonnes per hectare)`,
+            peas = `Peas (tonnes per hectare)`,
+            cassava = `Cassava (tonnes per hectare)`,
+            barley = `Barley (tonnes per hectare)`,
+            cocoa_beans = `Cocoa beans (tonnes per hectare)`,
+            bananas = `Bananas (tonnes per hectare)`)
+```
 
 ### Data Dictionary
 
