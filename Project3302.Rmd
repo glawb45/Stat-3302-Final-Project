@@ -83,6 +83,25 @@ merged_data = full_join(merged_data, df_air)
 merged_data[is.na(merged_data)] <- 0
 ```
 
+```{r}
+yield_glm = glm(round(wheat) ~ Entity + Year + fertilizer, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(wheat) ~ Year + fertilizer, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(wheat) ~ Entity + Year + fertilizer + land, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(rice) ~ Entity + Year + fertilizer, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(rice) ~ Year + fertilizer, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(rice) ~ Entity + Year + fertilizer + land, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(rice) ~ Year + land + fertilizer*wheat, family = 'poisson', data = merged_data)
+summary(yield_glm)
+yield_glm = glm(round(rice) ~ Year + fertilizer + wheat + land, family = 'poisson', data = merged_data)
+summary(yield_glm)
+```
+
 ### Data Dictionary
 
 # `key_crop_yields.csv`
