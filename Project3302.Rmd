@@ -15,11 +15,12 @@ arable_land <- read_csv('arable_land_pin.csv')
 # Fertilizer
 ```{r}
 fert <- fertilizer %>%
-  filter(Year %in% 1994:2013) %>%
-  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
-  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
+  filter(Year %in% 2002:2013) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia"))
+fert <-  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
   group_by(Year, Entity) %>%
-  summarize(yield = `Cereal yield (tonnes per hectare)`, fertilizer = as.double(`Nitrogen fertilizer use (kilograms per hectare)`))
+  summarize(yield = `Cereal yield (tonnes per hectare)`, fertilizer = `Nitrogen fertilizer use (kilograms per hectare)`)
+
 fert[is.na(fert)] <- 0
 ```
 
