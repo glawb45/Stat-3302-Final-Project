@@ -16,18 +16,20 @@ arable_land <- read_csv('arable_land_pin.csv')
 ```{r}
 fert <- fertilizer %>%
   filter(Year %in% 1994:2013) %>%
-  filter(Entity %in% c("Africa", "Americas", "Asia", "Asia, Central", "Australia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
   group_by(Year, Entity) %>%
-  summarize(yield = `Cereal yield (tonnes per hectare)`)
+  summarize(yield = `Cereal yield (tonnes per hectare)`, fertilizer = as.double(`Nitrogen fertilizer use (kilograms per hectare)`))
+fert[is.na(fert)] <- 0
 ```
 
 Arable Land
 
 ```{r}
-air <- arable %>%
+air <- arable_land %>%
   filter(Year %in% 1995:2014) %>%
-  filter(Entity %in% c("Africa", "Americas", "Asia", "Central Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Western Europe", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South-Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
-    mutate(air, Entity = ifelse(Entity == "South-Eastern Asia", "South Eastern Asia", Entity)) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Western Europe", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South-Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  mutate(air, Entity = ifelse(Entity == "South-Eastern Asia", "South Eastern Asia", Entity)) %>%
   group_by(Year, Entity) %>%
   summarize(arable_land = `Arable land needed to produce a fixed quantity of crops ((1.0 = 1961))`)
 ```
@@ -39,6 +41,7 @@ crop <- key_crop %>%
   filter(Year %in% 1995:2014) %>%
   filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "South-Eastern Asia", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
   mutate(crop, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
+  mutate(crop, Entity = ifelse(Entity == "South-Eastern Asia", "South Eastern Asia", Entity)) %>%
   group_by(Year, Entity) %>%
   summarize(wheat = `Wheat (tonnes per hectare)`,
             rice = `Rice (tonnes per hectare)`,
@@ -51,6 +54,33 @@ crop <- key_crop %>%
             barley = `Barley (tonnes per hectare)`,
             cocoa_beans = `Cocoa beans (tonnes per hectare)`,
             bananas = `Bananas (tonnes per hectare)`)
+crop[is.na(crop)] <- 0
+```
+
+```{r}
+crop <- crop %>% summarize(Entity,
+            wheat,
+            rice,
+            maize,
+            soybeans,
+            potatoes,
+            beans,
+            peas,
+            cassava,
+            barley,
+            cocoa_beans,
+            bananas, 
+            total = wheat+rice+maize+soybeans+potatoes+beans+peas+cassava+barley+cocoa_beans+bananas)
+
+```
+
+```{r}
+df_crop = data.frame(Year = crop$Year, Entity = crop$Entity, wheat = crop$wheat, rice = crop$rice, maize = crop$maize, soybeans = crop$soybeans, potatoes = crop$potatoes, beans = crop$beans, peas = crop$peas, cassava = crop$cassava, barley = crop$barley, cocoa = crop$cocoa_beans, bananas = crop$bananas, total = round(crop$total))
+df_fert = data.frame(Year = fert$Year, Entity = fert$Entity, fertilizer = fert$fertilizer)
+df_air = data.frame(Year = air$Year, Entity = air$Entity, land = air$arable_land)
+merged_data = full_join(df_crop, df_fert)
+merged_data = full_join(merged_data, df_air)
+merged_data[is.na(merged_data)] <- 0
 ```
 
 ### Data Dictionary
