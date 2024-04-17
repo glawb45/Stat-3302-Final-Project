@@ -11,6 +11,17 @@ fert <-  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Euro
 
 fert[is.na(fert)] <- 0
 ```
+```{r}
+df_crop = data.frame(Year = crop$Year, Entity = crop$Entity, wheat = crop$wheat, rice = crop$rice, maize = crop$maize, soybeans = crop$soybeans, potatoes = crop$potatoes, beans = crop$beans, peas = crop$peas, cassava = crop$cassava, barley = crop$barley, cocoa = crop$cocoa_beans, bananas = crop$bananas, total = round(crop$total))
+df_fert = data.frame(Year = fert$Year, Entity = fert$Entity, fertilizer = fert$fertilizer, Yield = fert$yield)
+df_air = data.frame(Year = air$Year, Entity = air$Entity, land = air$arable_land)
+merged_data = full_join(df_crop, df_fert)
+merged_data = full_join(merged_data, df_air)
+merged_data[is.na(merged_data)] <- 0
+
+```
+
+
 
 ```{r}
 yield_glm = glm(round(Yield) ~ Entity + Year + fertilizer + land + wheat + rice + maize + soybeans + potatoes + beans + peas + cassava + barley + cocoa + bananas, family = 'poisson', data = merged_data)
