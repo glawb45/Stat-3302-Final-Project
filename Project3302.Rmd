@@ -124,6 +124,7 @@ ggplot(merged_data, aes(as.factor(Year), Yield)) + geom_boxplot()
 ggplot(continents_data, aes(as.factor(Entity), Yield)) + geom_boxplot()
 ```
 
+```
 full_merged_crops %>%
   filter(Entity %in% "Africa") %>%
   ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")
