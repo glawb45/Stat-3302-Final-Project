@@ -21,7 +21,15 @@ merged_data[is.na(merged_data)] <- 0
 
 ```
 
+```{r}
+yield_glm = glm(round(Yield) ~  fertilizer + wheat + rice + maize + barley, family = 'poisson', data = merged_data)
+summary(yield_glm)
+```
 
+```{r}
+yield_glm = glm(round(Yield) ~  fertilizer + wheat + rice + maize + barley + soybeans + potatoes + beans + cassava + cocoa + bananas, family = 'poisson', data = merged_data)
+summary(yield_glm)
+```
 
 ```{r}
 yield_glm = glm(round(Yield) ~ Entity + Year + fertilizer + land + wheat + rice + maize + soybeans + potatoes + beans + peas + cassava + barley + cocoa + bananas, family = 'poisson', data = merged_data)
