@@ -109,6 +109,165 @@ ggplot(merged_data, aes(as.factor(Year), Yield)) + geom_boxplot()
 ggplot(continents_data, aes(as.factor(Entity), Yield)) + geom_boxplot()
 ```
 
+full_merged_crops %>%
+  filter(Entity %in% "Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")
+```
+
+
+```{r Americas}
+full_merged_crops %>%
+  filter(Entity %in% "Americas") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+```{r Asia}
+full_merged_crops %>%
+  filter(Entity %in% "Asia") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Australia/NZ}
+full_merged_crops %>%
+  filter(Entity %in% "Australia & New Zealand") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Caribbean}
+full_merged_crops %>%
+  filter(Entity %in% "Caribbean") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r C. America}
+full_merged_crops %>%
+  filter(Entity %in% "Central America") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r E. Africa}
+full_merged_crops %>%
+  filter(Entity %in% "Eastern Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r E. Asia}
+full_merged_crops %>%
+  filter(Entity %in% "Eastern Asia") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r E. Europe}
+full_merged_crops %>%
+  filter(Entity %in% "Eastern Europe") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Europe}
+full_merged_crops %>%
+  filter(Entity %in% "Europe") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Micronesia}
+full_merged_crops %>%
+  filter(Entity %in% "Micronesia (region)") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r M. Africa}
+full_merged_crops %>%
+  filter(Entity %in% "Middle Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Northern Africa}
+full_merged_crops %>%
+  filter(Entity %in% "Northern Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r N. America}
+full_merged_crops %>%
+  filter(Entity %in% "Northern America") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r Oceania}
+full_merged_crops %>%
+  filter(Entity %in% "Oceania") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r South America}
+full_merged_crops %>%
+  filter(Entity %in% "South America") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r SE Asia}
+full_merged_crops %>%
+  filter(Entity %in% "South Eastern Asia") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r S. Africa}
+full_merged_crops %>%
+  filter(Entity %in% "Southern Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r S. Asia}
+full_merged_crops %>%
+  filter(Entity %in% "Southern Asia") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r S. Europe}
+full_merged_crops %>%
+  filter(Entity %in% "Southern Europe") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r W. Africa}
+full_merged_crops %>%
+  filter(Entity %in% "Western Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r W. Asia}
+full_merged_crops %>%
+  filter(Entity %in% "Western Asia") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
+```{r W. Europe}
+full_merged_crops %>%
+  filter(Entity %in% "Western Europe") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm", family = "poisson")
+```
+
+
 ### Data Dictionary
 
 # `key_crop_yields.csv`
