@@ -22,13 +22,49 @@ merged_data[is.na(merged_data)] <- 0
 ```
 
 ```{r}
-yield_glm = glm(round(Yield) ~  fertilizer + wheat + rice + maize + barley, family = 'poisson', data = merged_data)
-summary(yield_glm)
-```
+yield_glm1 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley, family = 'poisson', data = merged_data)
+summary(yield_glm1)
 
+
+fitted = yield_glm1$fitted.values
+r = resid(yield_glm1, type = "pearson")
+d = resid(yield_glm1, type = "deviance")
+resid_df1 = data.frame(fitted = fitted, pearson = r, deviance = d)
+
+ggplot(resid_df1, aes(x = fitted, y = pearson)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Pearson residuals")
+
+ggplot(resid_df1, aes(x = fitted, y = deviance)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Deviance residuals")
+
+qqnorm(resid_df1$pearson); abline(0,1)
+qqnorm(resid_df1$deviance); abline(0,1)
+```
 ```{r}
-yield_glm = glm(round(Yield) ~  fertilizer + wheat + rice + maize + barley + soybeans + potatoes + beans + cassava + cocoa + bananas, family = 'poisson', data = merged_data)
-summary(yield_glm)
+yield_glm2 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley+soybeans+potatoes+beans+cassava+ cocoa+bananas, family = 'poisson', data = merged_data)
+summary(yield_glm2)
+
+fitted = yield_glm$fitted.values
+r = resid(yield_glm, type = "pearson")
+d = resid(yield_glm, type = "deviance")
+resid_df2 = data.frame(fitted = fitted, pearson = r, deviance = d)
+
+ggplot(resid_df2, aes(x = fitted, y = pearson)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Pearson residuals")
+
+ggplot(resid_df2, aes(x = fitted, y = deviance)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Deviance residuals")
+
+qqnorm(resid_df2$pearson); abline(0,1)
+qqnorm(resid_df2$deviance); abline(0,1)
 ```
 
 ```{r}
