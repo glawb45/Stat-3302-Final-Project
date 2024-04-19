@@ -103,6 +103,33 @@ yield_glm = glm(round(rice) ~ Year + fertilizer + wheat + land, family = 'poisso
 summary(yield_glm)
 ```
 
+### Data Visuals
+
+```{r, cache=TRUE}
+ggplot(merged_data, aes(fertilizer, Yield)) + geom_point() + geom_smooth(method="glm")
+```
+
+```{r, cache=TRUE}
+continents_data = 0
+continents_data <- merged_data %>% filter(Entity %in% c("Africa", "Northern America", "Asia", "Europe", "Oceania", "South America"))
+
+ggplot(continents_data, aes(fertilizer, Yield, color = Entity)) + geom_point()
+ggplot(continents_data, aes(land, Yield, color = Entity)) + geom_point()
+```
+
+```{r, cache=TRUE}
+ggplot(merged_data, aes(as.factor(Year), Yield)) + geom_boxplot()
+```
+```{r, cache=TRUE}
+ggplot(continents_data, aes(as.factor(Entity), Yield)) + geom_boxplot()
+```
+
+full_merged_crops %>%
+  filter(Entity %in% "Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")
+```
+
+
 ### Data Dictionary
 
 # `key_crop_yields.csv`
