@@ -69,25 +69,6 @@ merged_data = full_join(merged_data, df_air)
 
 ```
 
-```{r}
-yield_glm = glm(round(wheat) ~ Entity + Year + fertilizer, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(wheat) ~ Year + fertilizer, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(wheat) ~ Entity + Year + fertilizer + land, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(rice) ~ Entity + Year + fertilizer, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(rice) ~ Year + fertilizer, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(rice) ~ Entity + Year + fertilizer + land, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(rice) ~ Year + land + fertilizer*wheat, family = 'poisson', data = merged_data)
-summary(yield_glm)
-yield_glm = glm(round(rice) ~ Year + fertilizer + wheat + land, family = 'poisson', data = merged_data)
-summary(yield_glm)
-```
-
 # Invidual Modeling
 ```{r}
 (year.mod <- summary(glm(round(yield) ~ as.factor(Year), data = full_merged_crops, family = "quasipoisson")))
