@@ -9,7 +9,6 @@ fert <-  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Euro
   group_by(Year, Entity) %>%
   summarize(yield = `Cereal yield (tonnes per hectare)`, fertilizer = `Nitrogen fertilizer use (kilograms per hectare)`)
 
-fert[is.na(fert)] <- 0
 ```
 ```{r}
 df_crop = data.frame(Year = crop$Year, Entity = crop$Entity, wheat = crop$wheat, rice = crop$rice, maize = crop$maize, soybeans = crop$soybeans, potatoes = crop$potatoes, beans = crop$beans, peas = crop$peas, cassava = crop$cassava, barley = crop$barley, cocoa = crop$cocoa_beans, bananas = crop$bananas, total = round(crop$total))
@@ -17,64 +16,9 @@ df_fert = data.frame(Year = fert$Year, Entity = fert$Entity, fertilizer = fert$f
 df_air = data.frame(Year = air$Year, Entity = air$Entity, land = air$arable_land)
 merged_data = full_join(df_crop, df_fert)
 merged_data = full_join(merged_data, df_air)
-merged_data[is.na(merged_data)] <- 0
 
 ```
 
-```{r}
-yield_glm1 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley, family = 'poisson', data = merged_data)
-summary(yield_glm1)
-
-
-fitted = yield_glm1$fitted.values
-r = resid(yield_glm1, type = "pearson")
-d = resid(yield_glm1, type = "deviance")
-resid_df1 = data.frame(fitted = fitted, pearson = r, deviance = d)
-
-ggplot(resid_df1, aes(x = fitted, y = pearson)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0, col = 2) + 
-  labs(title = "Pearson residuals")
-
-ggplot(resid_df1, aes(x = fitted, y = deviance)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0, col = 2) + 
-  labs(title = "Deviance residuals")
-
-qqnorm(resid_df1$pearson); abline(0,1)
-qqnorm(resid_df1$deviance); abline(0,1)
-```
-```{r}
-yield_glm2 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley+soybeans+potatoes+beans+cassava+ cocoa+bananas, family = 'poisson', data = merged_data)
-summary(yield_glm2)
-
-fitted = yield_glm$fitted.values
-r = resid(yield_glm, type = "pearson")
-d = resid(yield_glm, type = "deviance")
-resid_df2 = data.frame(fitted = fitted, pearson = r, deviance = d)
-
-ggplot(resid_df2, aes(x = fitted, y = pearson)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0, col = 2) + 
-  labs(title = "Pearson residuals")
-
-ggplot(resid_df2, aes(x = fitted, y = deviance)) + 
-  geom_point() + 
-  geom_hline(yintercept = 0, col = 2) + 
-  labs(title = "Deviance residuals")
-
-qqnorm(resid_df2$pearson); abline(0,1)
-qqnorm(resid_df2$deviance); abline(0,1)
-```
-
-```{r}
-yield_glm = glm(round(Yield) ~ Entity + Year + fertilizer + land + wheat + rice + maize + soybeans + potatoes + beans + peas + cassava + barley + cocoa + bananas, family = 'poisson', data = merged_data)
-summary(yield_glm)
-
-yield_glm = glm(round(Yield) ~ Entity + Year + fertilizer + land + wheat + rice + maize + barley, family = 'poisson', data = merged_data)
-summary(yield_glm)
-
-```
 ```{r best entity}
 (best_entity <- glm(round(Yield) ~ Entity + barley + cocoa, data = merged_data, family = "quasipoisson"))
 
