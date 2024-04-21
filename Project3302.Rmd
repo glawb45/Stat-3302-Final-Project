@@ -88,6 +88,28 @@ yield_glm = glm(round(rice) ~ Year + fertilizer + wheat + land, family = 'poisso
 summary(yield_glm)
 ```
 
+### Control Group Models
+
+```{r best entity}
+(best_entity <- summary(glm(round(yield) ~ Entity + barley + cocoa_beans, data = full_merged_crops, family = "poisson")))
+```
+
+```{r best year}
+(best_year <- summary(glm(round(yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = full_merged_crops, family = "poisson")))
+
+```
+
+```{r best arable land}
+
+(best_air <- summary(glm(round(yield) ~ arable_land + wheat + maize + potatoes + cassava + barley + cocoa_beans, data = full_merged_crops, family = "poisson")))
+
+```
+
+```{r best crops}
+
+(top_crops <- summary(glm(round(yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = full_merged_crops, family = "poisson")))
+```
+
 ### Data Visualizations
 
 
