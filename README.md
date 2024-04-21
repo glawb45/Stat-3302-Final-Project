@@ -31,7 +31,7 @@ ggplot(resid_df3, aes(x = fitted, y = deviance)) +
   geom_hline(yintercept = 0, col = 2) + 
   labs(title = "Deviance residuals")
 
-qqnorm(resid_df3$deviance); abline(0,1)
+ggplot(resid_df3, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
 
 ```{r best year}
@@ -46,7 +46,7 @@ ggplot(resid_df4, aes(x = fitted, y = deviance)) +
   geom_hline(yintercept = 0, col = 2) + 
   labs(title = "Deviance residuals")
 
-qqnorm(resid_df4$deviance); abline(0,1)
+ggplot(resid_df4, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
 
 ```{r best arable land}
@@ -61,7 +61,7 @@ ggplot(resid_df5, aes(x = fitted, y = deviance)) +
   geom_hline(yintercept = 0, col = 2) + 
   labs(title = "Deviance residuals")
 
-qqnorm(resid_df5$deviance); abline(0,1)
+ggplot(resid_df5, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
 
 ```{r best crops}
@@ -76,7 +76,7 @@ ggplot(resid_df6, aes(x = fitted, y = deviance)) +
   geom_hline(yintercept = 0, col = 2) + 
   labs(title = "Deviance residuals")
 
-qqnorm(resid_df6$deviance); abline(0,1)
+ggplot(resid_df6, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
 
 ```{r best fertilizer}
@@ -92,5 +92,5 @@ ggplot(resid_df2, aes(x = fitted, y = deviance)) +
   geom_hline(yintercept = 0, col = 2) + 
   labs(title = "Deviance residuals")
 
-qqnorm(resid_df2$deviance); abline(0,1)
+ggplot(resid_df2, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
