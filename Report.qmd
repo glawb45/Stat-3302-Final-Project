@@ -485,8 +485,7 @@ Throughout our analysis of the effects of different variables on the crop yield,
 
 ### References
 
-::: {#refs}
-:::
+jthomasmack. “Tidytuesday/Data/2020/2020-09-01/Readme.Md at Master · Rfordatascience/Tidytuesday.” GitHub, 1 Sept. 2020, github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-01/readme.md. 
 
 # Appendix (Optional)
 
@@ -496,7 +495,7 @@ If you want to include your R code as an appendix, you can create a new code chu
 #| echo: true
 #| eval: false
 
-# Your code here
+
 ```
 
 
