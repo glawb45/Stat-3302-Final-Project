@@ -502,87 +502,87 @@ jthomasmack. “Tidytuesday/Data/2020/2020-09-01/Readme.Md at Master · Rfordata
 #| echo: true
 #| eval: false
 
-(year.mod <- summary(glm(round(yield) ~ as.factor(Year), data = full_merged_crops, family = "quasipoisson")))
+(year.mod <- summary(glm(round(Yield) ~ as.factor(Year), data = merged_data, family = "quasipoisson")))
 
-(entity.mod <- summary(glm(round(yield) ~ Entity - 1, data = full_merged_crops, family = "poisson")))
+(entity.mod <- summary(glm(round(Yield) ~ Entity - 1, data = merged_data, family = "poisson")))
 
-(air.mod <- summary(glm(round(yield) ~ arable_land -1, data = full_merged_crops, family = "quasipoisson")))
+(air.mod <- summary(glm(round(Yield) ~ arable_land -1, data = merged_data, family = "quasipoisson")))
 
-(wheat.mod <- summary(glm(round(yield) ~ wheat -1, data = full_merged_crops, family = "quasipoisson")))
+(wheat.mod <- summary(glm(round(Yield) ~ wheat -1, data = merged_data, family = "quasipoisson")))
 
-(rice.mod <- summary(glm(round(yield) ~ rice -1, data = full_merged_crops, family = "quasipoisson")))
+(rice.mod <- summary(glm(round(Yield) ~ rice -1, data = merged_data, family = "quasipoisson")))
 
-(maize.mod <- summary(glm(round(yield) ~ maize -1, data = full_merged_crops, family = "quasipoisson")))
+(maize.mod <- summary(glm(round(Yield) ~ maize -1, data = merged_data, family = "quasipoisson")))
 
-(barley.mod <- summary(glm(round(yield) ~ barley -1, data = full_merged_crops, family = "quasipoisson")))
+(barley.mod <- summary(glm(round(Yield) ~ barley -1, data = merged_data, family = "quasipoisson")))
 
-(soybean.mod <- summary(glm(round(yield) ~ soybeans -1, data = full_merged_crops, family = "quasipoisson")))
+(soybean.mod <- summary(glm(round(Yield) ~ soybeans -1, data = merged_data, family = "quasipoisson")))
 
-(potato.mod <- summary(glm(round(yield) ~ potatoes -1, data = full_merged_crops, family = "quasipoisson")))
+(potato.mod <- summary(glm(round(Yield) ~ potatoes -1, data = merged_data, family = "quasipoisson")))
 
-(beans.mod <- summary(glm(round(yield) ~ beans -1, data = full_merged_crops, family = "quasipoisson")))
+(beans.mod <- summary(glm(round(Yield) ~ beans -1, data = merged_data, family = "quasipoisson")))
 
-(peas.mod <- summary(glm(round(yield) ~ peas -1, data = full_merged_crops, family = "quasipoisson")))
+(peas.mod <- summary(glm(round(Yield) ~ peas -1, data = merged_data, family = "quasipoisson")))
 
-(cassava.mod <- summary(glm(round(yield) ~ cassava -1, data = full_merged_crops, family = "quasipoisson")))
+(cassava.mod <- summary(glm(round(Yield) ~ cassava -1, data = merged_data, family = "quasipoisson")))
 
-(cocoa.mod <- summary(glm(round(yield) ~ cocoa_beans -1, data = full_merged_crops, family = "quasipoisson")))
+(cocoa.mod <- summary(glm(round(Yield) ~ cocoa_beans -1, data = merged_data, family = "quasipoisson")))
 
-(bananas.mod <- summary(glm(round(yield) ~ bananas -1, data = full_merged_crops, family = "quasipoisson")))
+(bananas.mod <- summary(glm(round(Yield) ~ bananas -1, data = merged_data, family = "quasipoisson")))
 
-(best_rice <- summary(glm(round(yield) ~ wheat + rice + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = full_merged_crops, family = "quasipoisson")))
+(best_rice <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
 
-(best_beans <- summary(glm(round(yield) ~ wheat + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans, data = full_merged_crops, family = "quasipoisson")))
+(best_beans <- summary(glm(round(Yield) ~ wheat + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
 
-(best_peas <- summary(glm(round(yield) ~ peas + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = full_merged_crops, family = "quasipoisson")))
+(best_peas <- summary(glm(round(Yield) ~ peas + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
 
-(best_bananas <- summary(glm(round(yield) ~ wheat + rice + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans + bananas, data = full_merged_crops, family = "quasipoisson")))
+(best_bananas <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans + bananas, data = merged_data, family = "quasipoisson")))
 
-summary(glm(round(yield) ~ Entity*as.factor(Year) - 1, data = full_merged_crops, family = "poisson"))
+summary(glm(round(Yield) ~ Entity*as.factor(Year) - 1, data = merged_data, family = "poisson"))
 
-summary(glm(round(yield) ~ Entity*wheat, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*wheat, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*rice, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*rice, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*maize, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*maize, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*soybeans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*soybeans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*potatoes, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*potatoes, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*beans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*beans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*peas, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*peas, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*cassava, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*cassava, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*barley, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*barley, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*cocoa_beans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*cocoa_beans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ Entity*bananas, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*bananas, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*wheat, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*wheat, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*rice, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*rice, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*maize, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*maize, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*soybeans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*soybeans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*potatoes, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*potatoes, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*beans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*beans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*peas, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*peas, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*cassava, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*cassava, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*barley, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*barley, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*cocoa_beans, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*cocoa_beans, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(yield) ~ as.factor(Year)*bananas, data = full_merged_crops, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*bananas, data = merged_data, family = "quasipoisson"))
 
 entity1 = merged_data %>% summarise(entity = Entity, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
 plot1 = ggpairs(entity1, cardinality_threshold = 24, progress = F)
