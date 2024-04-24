@@ -188,149 +188,174 @@ We found that cocoa beans had the highest multiplicative-odds increase of 2.18. 
 
 With Africa as a baseline, there was not a single significant effect. Removing the baseline of Africa did not change much for the interaction effects. There were still no significant effects among interactions — all the significant effects with the regular variables were described above.
 
+## Year vs. Yield plots by Entity
+
+```{r Africa}
+plot.afr <- full_merged_crops %>%
+  filter(Entity %in% "Africa") %>%
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Africa")
+```
+
+
 ```{r Americas}
-plot.amer <- merged_crops %>%
+plot.amer <- full_merged_crops %>%
   filter(Entity %in% "Americas") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Americas")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Americas")
+
 ```
 
 ```{r Asia}
-plot.asia <- merged_crops %>%
+plot.asia <- full_merged_crops %>%
   filter(Entity %in% "Asia") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Asia")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Asia")
 ```
 
 
 ```{r Australia/NZ}
-plot.aus_nz <- merged_crops %>%
+plot.aus_nz <- full_merged_crops %>%
   filter(Entity %in% "Australia & New Zealand") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Australia/NZ")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Australia/NZ")
 ```
 
 
 ```{r Caribbean}
-plot.car <- merged_crops %>%
+plot.car <- full_merged_crops %>%
   filter(Entity %in% "Caribbean") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Caribbean")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Caribbean")
 ```
 
 
 ```{r C. America}
-plot.c_amer <- merged_crops %>%
+plot.c_amer <- full_merged_crops %>%
   filter(Entity %in% "Central America") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "C. America")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "C. America")
 ```
 
 
 ```{r E. Africa}
-plot.e_afr <- merged_crops %>%
+plot.e_afr <- full_merged_crops %>%
   filter(Entity %in% "Eastern Africa") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "E. Africa")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "E. Africa")
 ```
 
 
 ```{r E. Asia}
-plot.e_asia <- merged_crops %>%
+plot.e_asia <- full_merged_crops %>%
   filter(Entity %in% "Eastern Asia") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "E. Asia")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Asia")
 ```
 
 
 ```{r E. Europe}
-plot.e_euro <- merged_crops %>%
+plot.e_euro <- full_merged_crops %>%
   filter(Entity %in% "Eastern Europe") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "E. Europe")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Europe")
 ```
 
 
 ```{r Europe}
-plot.euro <- merged_crops %>%
+plot.euro <- full_merged_crops %>%
   filter(Entity %in% "Europe") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(main = "Europe")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "Europe")
 ```
 
 
 ```{r Micronesia}
-plot.micro <- merged_crops %>%
+plot.micro <- full_merged_crops %>%
   filter(Entity %in% "Micronesia (region)") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Micronesia")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Micronesia")
 ```
 
 
 ```{r M. Africa}
-plot.m_afr <- merged_crops %>%
+plot.m_afr <- full_merged_crops %>%
   filter(Entity %in% "Middle Africa") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "M. Africa")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "M. Africa")
 ```
 
 
 ```{r Northern Africa}
-plot.n_afr <- merged_crops %>%
+plot.n_afr <- full_merged_crops %>%
   filter(Entity %in% "Northern Africa") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "N. Africa")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. Africa")
 ```
 
 
 ```{r N. America}
-plot.n_amer <- merged_crops %>%
+plot.n_amer <- full_merged_crops %>%
   filter(Entity %in% "Northern America") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "N. America")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. America")
 ```
 
 
 ```{r Oceania}
-plot.oceania <- merged_crops %>%
+plot.oceania <- full_merged_crops %>%
   filter(Entity %in% "Oceania") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "Oceania")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Oceania")
 ```
 
 
 ```{r South America}
-plot.s_amer <- merged_crops %>%
+plot.s_amer <- full_merged_crops %>%
   filter(Entity %in% "South America") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "S. America")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. America")
 ```
 
 
 ```{r S. Africa}
-plot.s_afr <- merged_crops %>%
+plot.s_afr <- full_merged_crops %>%
   filter(Entity %in% "Southern Africa") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "S. Africa")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Africa")
 ```
 
 
 ```{r S. Asia}
-plot.s_asia <- merged_crops %>%
+plot.s_asia <- full_merged_crops %>%
   filter(Entity %in% "Southern Asia") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "S. Asia")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Asia")
 ```
 
 
 ```{r S. Europe}
-plot.s_euro <- merged_crops %>%
+plot.s_euro <- full_merged_crops %>%
   filter(Entity %in% "Southern Europe") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "S. Europe")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Europe")
 ```
 
 
 ```{r W. Africa}
-plot.w_afr <- merged_crops %>%
+plot.w_afr <- full_merged_crops %>%
   filter(Entity %in% "Western Africa") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(main = "W. Africa")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "W. Africa")
 ```
 
 
 ```{r W. Asia}
-plot.w_asia <- merged_crops %>%
+plot.w_asia <- full_merged_crops %>%
   filter(Entity %in% "Western Asia") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(main = "W. Asia")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Asia")
 ```
 
 ```{r W. Europe}
-plot.w_euro <- merged_crops %>%
+plot.w_euro <- full_merged_crops %>%
   filter(Entity %in% "Western Europe") %>%
-  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Europe")
+  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Europe")
 ```
+
+```{r}
+grid.arrange(plot.afr, plot.amer, plot.asia, plot.aus_nz, plot.c_amer, plot.car, plot.e_afr, plot.e_asia, plot.e_euro, plot.euro, plot.m_afr, plot.micro, plot.n_afr, plot.n_amer, plot.oceania, plot.s_afr, plot.s_amer, plot.s_asia, plot.s_euro, plot.w_afr, plot.w_asia, plot.euro, ncol = 5)
+```
+
+Most of these plots are fairly similar in their slope and correlation between yield and year over time. We found that the greatest correlation in the logistic regression between year and yield came with Western Europe by value, but Northern America by increasing slope. The one with the smallest correlation came with Australia and New Zealand, perhaps indicating that not a lot of farming goes on here with respect to the rest of the world.
+
+
+# Entity*wheat
+
+With respect to wheat produced in Africa as a baseline, we found that no positive odds increases with any interactions between wheat and another region. We did find that the biggest change was Western Africa  — a change from Africa to Western Africa produces a 0.709-multiplicative odds decrease in yield when only considering wheat as a crop. The region with the best log odds ratio, however, was Southern Africa, which, with respect to Africa, had a 0.269-multiplicative-odds decrease while producing wheat in overall crop yield.
+
+# Entity*rice
+
+With respect to rice produced in Africa as a baseline, we once again found that no positive odds increases with any interactions between rice and another region. The most significant log odds ratio change was a one-unit change in rice produced in the Caribbean corresponded to a 0.9745-multiplicative-odds decrease in yield. Perhaps it’s not really fair to compare anywhere to Africa in terms of rice production because it has been cultivated for several thousand years, but the Caribbean still produces a good amount of rice today.
 
 ```{r}
 grid.arrange(plot.afr, plot.amer, plot.asia, plot.aus_nz, plot.c_amer, plot.car, plot.e_afr, plot.e_asia, plot.e_euro, plot.euro, plot.m_afr, plot.micro, plot.n_afr, plot.n_amer, plot.oceania, plot.s_afr, plot.s_amer, plot.s_asia, plot.s_euro, plot.w_afr, plot.w_asia, plot.euro, ncol = 5)
