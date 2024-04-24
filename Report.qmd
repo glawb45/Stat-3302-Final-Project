@@ -127,8 +127,8 @@ $$
                    & \beta_7 \times \text{(Beans)}_i \\
                    & \beta_8 \times \text{(Cassava)}_i \\
                    & \beta_9 \times \text{(Barley)}_i \\
-                   & \beta_10 \times \text{(Cocoa)}_i \\
-                   & \beta_11 \times \text{(Bananas)}_i \\
+                   & \beta_{10} \times \text{(Cocoa)}_i \\
+                   & \beta_{11} \times \text{(Bananas)}_i \\
 \end{aligned}
 $$
 Where $i = 1,...,n$ and $n = 440$.
