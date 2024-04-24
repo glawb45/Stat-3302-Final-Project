@@ -191,155 +191,155 @@ With Africa as a baseline, there was not a single significant effect. Removing t
 ## Year vs. Yield plots by Entity
 
 ```{r Africa}
-plot.afr <- full_merged_crops %>%
+plot.afr <- merged_data %>%
   filter(Entity %in% "Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Africa")
 ```
 
 
 ```{r Americas}
-plot.amer <- full_merged_crops %>%
+plot.amer <- merged_data %>%
   filter(Entity %in% "Americas") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Americas")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Americas")
 
 ```
 
 ```{r Asia}
-plot.asia <- full_merged_crops %>%
+plot.asia <- merged_data %>%
   filter(Entity %in% "Asia") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Asia")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Asia")
 ```
 
 
 ```{r Australia/NZ}
-plot.aus_nz <- full_merged_crops %>%
+plot.aus_nz <- merged_data %>%
   filter(Entity %in% "Australia & New Zealand") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Australia/NZ")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Australia/NZ")
 ```
 
 
 ```{r Caribbean}
-plot.car <- full_merged_crops %>%
+plot.car <- merged_data %>%
   filter(Entity %in% "Caribbean") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Caribbean")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Caribbean")
 ```
 
 
 ```{r C. America}
-plot.c_amer <- full_merged_crops %>%
+plot.c_amer <- merged_data %>%
   filter(Entity %in% "Central America") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "C. America")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "C. America")
 ```
 
 
 ```{r E. Africa}
-plot.e_afr <- full_merged_crops %>%
+plot.e_afr <- merged_data %>%
   filter(Entity %in% "Eastern Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "E. Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "E. Africa")
 ```
 
 
 ```{r E. Asia}
-plot.e_asia <- full_merged_crops %>%
+plot.e_asia <- merged_data %>%
   filter(Entity %in% "Eastern Asia") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Asia")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Asia")
 ```
 
 
 ```{r E. Europe}
-plot.e_euro <- full_merged_crops %>%
+plot.e_euro <- merged_data %>%
   filter(Entity %in% "Eastern Europe") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Europe")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "E. Europe")
 ```
 
 
 ```{r Europe}
-plot.euro <- full_merged_crops %>%
+plot.euro <- merged_data %>%
   filter(Entity %in% "Europe") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "Europe")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "Europe")
 ```
 
 
 ```{r Micronesia}
-plot.micro <- full_merged_crops %>%
+plot.micro <- merged_data %>%
   filter(Entity %in% "Micronesia (region)") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Micronesia")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Micronesia")
 ```
 
 
 ```{r M. Africa}
-plot.m_afr <- full_merged_crops %>%
+plot.m_afr <- merged_data %>%
   filter(Entity %in% "Middle Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "M. Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "M. Africa")
 ```
 
 
 ```{r Northern Africa}
-plot.n_afr <- full_merged_crops %>%
+plot.n_afr <- merged_data %>%
   filter(Entity %in% "Northern Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. Africa")
 ```
 
 
 ```{r N. America}
-plot.n_amer <- full_merged_crops %>%
+plot.n_amer <- merged_data %>%
   filter(Entity %in% "Northern America") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. America")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "N. America")
 ```
 
 
 ```{r Oceania}
-plot.oceania <- full_merged_crops %>%
+plot.oceania <- merged_data %>%
   filter(Entity %in% "Oceania") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Oceania")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "Oceania")
 ```
 
 
 ```{r South America}
-plot.s_amer <- full_merged_crops %>%
+plot.s_amer <- merged_data %>%
   filter(Entity %in% "South America") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. America")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. America")
 ```
 
 
 ```{r S. Africa}
-plot.s_afr <- full_merged_crops %>%
+plot.s_afr <- merged_data %>%
   filter(Entity %in% "Southern Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Africa")
 ```
 
 
 ```{r S. Asia}
-plot.s_asia <- full_merged_crops %>%
+plot.s_asia <- merged_data %>%
   filter(Entity %in% "Southern Asia") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Asia")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Asia")
 ```
 
 
 ```{r S. Europe}
-plot.s_euro <- full_merged_crops %>%
+plot.s_euro <- merged_data %>%
   filter(Entity %in% "Southern Europe") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Europe")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title =  "S. Europe")
 ```
 
 
 ```{r W. Africa}
-plot.w_afr <- full_merged_crops %>%
+plot.w_afr <- merged_data %>%
   filter(Entity %in% "Western Africa") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "W. Africa")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm")  + labs(title =  "W. Africa")
 ```
 
 
 ```{r W. Asia}
-plot.w_asia <- full_merged_crops %>%
+plot.w_asia <- merged_data %>%
   filter(Entity %in% "Western Asia") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Asia")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Asia")
 ```
 
 ```{r W. Europe}
-plot.w_euro <- full_merged_crops %>%
+plot.w_euro <- merged_data %>%
   filter(Entity %in% "Western Europe") %>%
-  ggplot(aes(x = Year, y = yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Europe")
+  ggplot(aes(x = Year, y = Yield)) + geom_point() + theme_bw() + geom_smooth(method = "glm") + labs(title = "W. Europe")
 ```
 
 ```{r}
