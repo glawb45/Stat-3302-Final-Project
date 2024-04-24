@@ -349,27 +349,23 @@ grid.arrange(plot.afr, plot.amer, plot.asia, plot.aus_nz, plot.c_amer, plot.car,
 Most of these plots are fairly similar in their slope and correlation between yield and year over time. We found that the greatest correlation in the logistic regression between year and yield came with Western Europe by value, but Northern America by increasing slope. The one with the smallest correlation came with Australia and New Zealand, perhaps indicating that not a lot of farming goes on here with respect to the rest of the world.
 
 
-# Entity*wheat
+Summary of interaction effects with entity and crops:
 
-With respect to wheat produced in Africa as a baseline, we found that no positive odds increases with any interactions between wheat and another region. We did find that the biggest change was Western Africa  — a change from Africa to Western Africa produces a 0.709-multiplicative odds decrease in yield when only considering wheat as a crop. The region with the best log odds ratio, however, was Southern Africa, which, with respect to Africa, had a 0.269-multiplicative-odds decrease while producing wheat in overall crop yield.
+Entity*wheat: A one-unit change in wheat produced in Western Africa with respect to wheat produced in Africa corresponds to a 0.709-multiplicative-odds decrease in crop yield.
+Entity*rice: A one-unit change in rice produced in the Caribbean with respect to rice produced in Africa corresponds to a 0.9745-multiplicative-odds decrease in crop yield.
+Entity*maize: A one-unit change in maize produced in Australia & New Zealand with respect to maize produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity*soybeans: A one-unit change in soybeans produced in Asia with respect to soybeans produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity*potatoes: A one-unit change in potatoes produced in Oceania with respect to potatoes produced in Africa corresponds to a 0.184-multiplicative-odds decrease in crop yield.
+Entity*beans: A one-unit change in beans produced in Australia & New Zealand or Oceania with respect to beans produced in Africa corresponds to a 3.26-multiplicative-odds decrease in crop yield.
+Entity*peas: A one-unit change in peas produced in Europe with respect to peas produced in Africa corresponds to a 2.35-multiplicative-odds decrease in crop yield.
+Entity*cassava: A one-unit change in cassava produced in Northern Africa with respect to cassava produced in Africa corresponds to a 2.17-multiplicative-odds decrease in crop yield.
+Entity*barley: A one-unit change in barley produced in Western Africa with respect to barley produced in Africa corresponds to a 0.81-multiplicative-odds decrease in crop yield.
+Entity*cocoa_beans: A one-unit change in cocoa beans produced in Micronesia with respect to cocoa beans produced in Africa corresponds to a 15.56-multiplicative-odds decrease in crop yield.
+Entity*bananas: A one-unit change in bananas produced in Europe with respect to bananas produced in Africa corresponds to a 0.198-multiplicative-odds decrease in crop yield.
 
-# Entity*rice
+# Year*Crop
+There were no significant effects found when the year and crop were acting together, interestingly enough. Intuitively, this may make sense in a way, just because if you’re only looking at the year, perhaps the total yield isn’t changing that much with each crop on an annual basis.
 
-With respect to rice produced in Africa as a baseline, we once again found that no positive odds increases with any interactions between rice and another region. The most significant log odds ratio change was a one-unit change in rice produced in the Caribbean corresponded to a 0.9745-multiplicative-odds decrease in yield. Perhaps it’s not really fair to compare anywhere to Africa in terms of rice production because it has been cultivated for several thousand years, but the Caribbean still produces a good amount of rice today.
-
-```{r}
-grid.arrange(plot.afr, plot.amer, plot.asia, plot.aus_nz, plot.c_amer, plot.car, plot.e_afr, plot.e_asia, plot.e_euro, plot.euro, plot.m_afr, plot.micro, plot.n_afr, plot.n_amer, plot.oceania, plot.s_afr, plot.s_amer, plot.s_asia, plot.s_euro, plot.w_afr, plot.w_asia, plot.euro, ncol = 5)
-```
-
-
-
-# Entity*wheat
-
-With respect to wheat produced in Africa as a baseline, we found that no positive odds increases with any interactions between wheat and another region. We did find that the biggest change was Western Africa  — a change from Africa to Western Africa produces a 0.709-multiplicative odds decrease in yield when only considering wheat as a crop. The region with the best log odds ratio, however, was Southern Africa, which, with respect to Africa, had a 0.269-multiplicative-odds decrease while producing wheat in overall crop yield.
-
-# Entity*rice
-
-With respect to rice produced in Africa as a baseline, we once again found that no positive odds increases with any interactions between rice and another region. The most significant log odds ratio change was a one-unit change in rice produced in the Caribbean corresponded to a 0.9745-multiplicative-odds decrease in yield. Perhaps it’s not really fair to compare anywhere to Africa in terms of rice production because it has been cultivated for several thousand years, but the Caribbean still produces a good amount of rice today.
 
 ```{r}
 best_year <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
