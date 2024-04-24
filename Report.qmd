@@ -351,27 +351,27 @@ Most of these plots are fairly similar in their slope and correlation between yi
 
 Summary of interaction effects with entity and crops:
 
-Entity interation with wheat: A one-unit change in wheat produced in Western Africa with respect to wheat produced in Africa corresponds to a 0.709-multiplicative-odds decrease in crop yield.
+Entity interaction with wheat: A one-unit change in wheat produced in Western Africa with respect to wheat produced in Africa corresponds to a 0.709-multiplicative-odds decrease in crop yield.
 
-Entity interation with rice: A one-unit change in rice produced in the Caribbean with respect to rice produced in Africa corresponds to a 0.9745-multiplicative-odds decrease in crop yield.
+Entity interaction with rice: A one-unit change in rice produced in the Caribbean with respect to rice produced in Africa corresponds to a 0.9745-multiplicative-odds decrease in crop yield.
 
-Entity interation with maize: A one-unit change in maize produced in Australia & New Zealand with respect to maize produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity interaction with maize: A one-unit change in maize produced in Australia & New Zealand with respect to maize produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
 
-Entity interation with soybeans: A one-unit change in soybeans produced in Asia with respect to soybeans produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity interaction with soybeans: A one-unit change in soybeans produced in Asia with respect to soybeans produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
 
-Entity interation with potatoes: A one-unit change in potatoes produced in Oceania with respect to potatoes produced in Africa corresponds to a 0.184-multiplicative-odds decrease in crop yield.
+Entity interaction with potatoes: A one-unit change in potatoes produced in Oceania with respect to potatoes produced in Africa corresponds to a 0.184-multiplicative-odds decrease in crop yield.
 
-Entity interation with beans: A one-unit change in beans produced in Australia & New Zealand or Oceania with respect to beans produced in Africa corresponds to a 3.26-multiplicative-odds decrease in crop yield.
+Entity interaction with beans: A one-unit change in beans produced in Australia & New Zealand or Oceania with respect to beans produced in Africa corresponds to a 3.26-multiplicative-odds decrease in crop yield.
 
-Entity interation with peas: A one-unit change in peas produced in Europe with respect to peas produced in Africa corresponds to a 2.35-multiplicative-odds decrease in crop yield.
+Entity interaction with peas: A one-unit change in peas produced in Europe with respect to peas produced in Africa corresponds to a 2.35-multiplicative-odds decrease in crop yield.
 
-Entity interation with cassava: A one-unit change in cassava produced in Northern Africa with respect to cassava produced in Africa corresponds to a 2.17-multiplicative-odds decrease in crop yield.
+Entity interaction with cassava: A one-unit change in cassava produced in Northern Africa with respect to cassava produced in Africa corresponds to a 2.17-multiplicative-odds decrease in crop yield.
 
-Entity interation with barley: A one-unit change in barley produced in Western Africa with respect to barley produced in Africa corresponds to a 0.81-multiplicative-odds decrease in crop yield.
+Entity interaction with barley: A one-unit change in barley produced in Western Africa with respect to barley produced in Africa corresponds to a 0.81-multiplicative-odds decrease in crop yield.
 
-Entity interation with cocoa_beans: A one-unit change in cocoa beans produced in Micronesia with respect to cocoa beans produced in Africa corresponds to a 15.56-multiplicative-odds decrease in crop yield.
+Entity interaction with cocoa_beans: A one-unit change in cocoa beans produced in Micronesia with respect to cocoa beans produced in Africa corresponds to a 15.56-multiplicative-odds decrease in crop yield.
 
-Entity interation with bananas: A one-unit change in bananas produced in Europe with respect to bananas produced in Africa corresponds to a 0.198-multiplicative-odds decrease in crop yield.
+Entity interaction with bananas: A one-unit change in bananas produced in Europe with respect to bananas produced in Africa corresponds to a 0.198-multiplicative-odds decrease in crop yield.
 
 # Year*Crop
 
