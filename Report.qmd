@@ -12,7 +12,6 @@ execute:
   echo: false
   warning: false
   message: false
-bibliography: references.bib
 ---
 
 ```{r}
