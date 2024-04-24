@@ -481,13 +481,13 @@ In this section, discuss and interpret your results. Explain the implications an
 
 # Conclusion
 ```{r}
-crops.anova <- glm(round(Yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+crops.anova <- glm(round(Yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
 
-air.anova <- glm(round(Yield) ~ arable_land + wheat + maize + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+air.anova <- glm(round(Yield) ~ arable_land + wheat + maize + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
 
-year.anova <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+year.anova <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
 
-entity.anova <- glm(round(Yield) ~ Entity + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+entity.anova <- glm(round(Yield) ~ Entity + barley + cocoa, data = merged_data, family = "quasipoisson")
 
 anova(crops.anova, air.anova, year.anova, entity.anova)
 ```
@@ -526,17 +526,17 @@ jthomasmack. “Tidytuesday/Data/2020/2020-09-01/Readme.Md at Master · Rfordata
 
 (cassava.mod <- summary(glm(round(Yield) ~ cassava -1, data = merged_data, family = "quasipoisson")))
 
-(cocoa.mod <- summary(glm(round(Yield) ~ cocoa_beans -1, data = merged_data, family = "quasipoisson")))
+(cocoa.mod <- summary(glm(round(Yield) ~ cocoa -1, data = merged_data, family = "quasipoisson")))
 
 (bananas.mod <- summary(glm(round(Yield) ~ bananas -1, data = merged_data, family = "quasipoisson")))
 
-(best_rice <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
+(best_rice <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")))
 
-(best_beans <- summary(glm(round(Yield) ~ wheat + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
+(best_beans <- summary(glm(round(Yield) ~ wheat + maize + soybeans + potatoes + beans + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")))
 
-(best_peas <- summary(glm(round(Yield) ~ peas + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")))
+(best_peas <- summary(glm(round(Yield) ~ peas + wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")))
 
-(best_bananas <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + beans + cassava + barley + cocoa_beans + bananas, data = merged_data, family = "quasipoisson")))
+(best_bananas <- summary(glm(round(Yield) ~ wheat + rice + maize + soybeans + potatoes + beans + cassava + barley + cocoa + bananas, data = merged_data, family = "quasipoisson")))
 
 summary(glm(round(Yield) ~ Entity*as.factor(Year) - 1, data = merged_data, family = "poisson"))
 
@@ -558,7 +558,7 @@ summary(glm(round(Yield) ~ Entity*cassava, data = merged_data, family = "quasipo
 
 summary(glm(round(Yield) ~ Entity*barley, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(Yield) ~ Entity*cocoa_beans, data = merged_data, family = "quasipoisson"))
+summary(glm(round(Yield) ~ Entity*cocoa, data = merged_data, family = "quasipoisson"))
 
 summary(glm(round(Yield) ~ Entity*bananas, data = merged_data, family = "quasipoisson"))
 
@@ -580,7 +580,7 @@ summary(glm(round(Yield) ~ as.factor(Year)*cassava, data = merged_data, family =
 
 summary(glm(round(Yield) ~ as.factor(Year)*barley, data = merged_data, family = "quasipoisson"))
 
-summary(glm(round(Yield) ~ as.factor(Year)*cocoa_beans, data = merged_data, family = "quasipoisson"))
+summary(glm(round(Yield) ~ as.factor(Year)*cocoa, data = merged_data, family = "quasipoisson"))
 
 summary(glm(round(Yield) ~ as.factor(Year)*bananas, data = merged_data, family = "quasipoisson"))
 
