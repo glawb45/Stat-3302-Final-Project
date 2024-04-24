@@ -1,0 +1,369 @@
+---
+title: "Data Analysis Report - Holy Crop!"
+author: "Hailey Shaver, Jacob Baum, Gaurav Law, and Ben Strong"
+date: "04/24/2024"
+format:
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 12pt
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+
+## Libraries used.
+library(tidyverse)
+library(dplyr)
+library(GGally)
+library(tinytex)
+library(jtools)
+library(grid)
+library(gridExtra)
+```
+
+# Abstract
+
+This report explores the effects of land and fertilizer on total crop yield across many different regions. There were many variables considered in the analysis of crop yield. We chose to look at the Entity, amount of fertilizer used, and the amount of arable land available to grow crops and to observe how each of these affected individual crops as well as the total yield of all the cereal crops. Some of the main regions we analyze the effects of are the Americas (North and South), Asia (Southern, Western, and South Eastern), Australia and New Zealand, the Caribbean, Central America, Africa (Eastern, Western, and Southern), Europe (Eastern, Western, and Southern), Oceania,  To study these effects, we utilize logistic regression analysis to quantify the effects of these variables on the crop yield. By using our logistic regression model, we are able to compare the changes in yield based on the different factors for any given year as well as predict a potential cereal crop yield for future years based on our data. Through these findings, we can quantify the importance of fertilization management and strategies to increase productivity and yield of crops across many different countries and regions. 
+
+After testing many different logistic models, we came to find out that arable land provided the least effect on the crop yield which was very interesting as it was speculated to have been one of the bigger contributing factors to total yield. Fertilizer had the highest positive correlation with respect to the crop yield and had a more dramatic effect on the total amount of crops produced. The crops that had the most significant increase in yield (with respect to the p-value)  due to the amount of fertilizer used were rice, potatoes, cassava, and beans.
+
+# Introduction
+
+Crop yield is our main area of concern, and the problem that arises out of this is what conditions and factors can affect it given data recorded from previous years. What regions around the world are affected differently than others, naturally was one of the first areas that we thought to look at. Which crops have the largest impact on the yield overall, also appeared as we were analyzing the data. How has nitrogen fertilizer affected crop outputs and changed over the years. 
+
+To answer these questions, we created multiple logistic regression models to study the strength of each variable’s effects on both individual crops and the total crop yield. With these models, we compared the AIC and p-values of each covariate and its effects on the yield. After careful analysis and visualizations of the different variables and their effects, we noticed that our original assumptions about region/Entity having a relatively great effect on crop yield was not as significant as we had first thought. However, fertilizer did in fact have a larger impact on each individual crop yield, as well as the overall cereal yield which confirmed our second assumption. We chose to look at many different factors and covariates for why our original assumption about the region having an impact on crop yield/ overall cereal yield wasn’t confirmed and what reasons there could be behind that. We investigated many different models to attempt to see the effects, and we found that the quasi-poisson model most accurately depicts the interactions of multiple variables on the total crop yield.
+
+# Data and Methods
+
+The data that we used was the Global Crop Yields from Our World In Data, through the tidytuesday github. There were five datasets in total and all share the categorical variables of Entity (Country/Region Name), Code (Country Code) and Year. The first dataset was focused on yields of key crops in tonnes per hectare such as wheat, rice, maize, etc. The second dataset included the arable land needed to produce a fixed quantity of crops normalized to 1961. The third dataset included nitrogen fertilizer usage in kilograms per hectare and cereal yields in tonnes per hectare. The fourth dataset focused on cereal yield index with a variable for the change to land area for cereal production since 1961, as well as population. The fifth data set looked at tractors per 100 sq km of arable land, as well as cereal yield in kg per hectare and the total population as well. 
+
+We decided to only focus on the first three datasets to cut down on the number of variables, then to clean the data further we filtered out the data to only include larger Entities, reducing our data to large regions/continents so we could use Entity as a categorical variable with a much smaller number of categories. Then after merging the filtered crop yields, arable land and fertilizer datasets we started looking at the year variable. Some Entities did not have values for certain years, so we had to limit our models to only use a certain range of years, where we settled on 1995-2014. There were still some Entities that did not have one specific type of crop, but these were ignored when we made the models.
+
+After cleaning the data, we classify our outcomes as the total yield of crops in kilograms per hectare and denote the observed values as yi where i = 1, …, n, n = 460. We then started searching for models using stepwise regression starting with the full model, removing some variables to minimize the AIC. At this point we split our focus to creating two models, one that focuses on the effects of arable land, Entity and specific crops over time on total yield, and another that looks at the effect of fertilizer on total yield.We also found that a quasi-poisson model was able to show us better models when looking at the residuals 
+
+```{r}
+#| label: reading_data
+key_crop <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/key_crop_yields.csv')
+fertilizer <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/cereal_crop_yield_vs_fertilizer_application.csv')
+land_use <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/land_use_vs_yield_change_in_cereal_production.csv')
+arable_land <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-09-01/arable_land_pin.csv')
+```
+
+For the Entity model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
+$$
+\begin{aligned}
+  \mbox{logit}(p_i) = & \beta_0 + \\ 
+                    & \beta_1 \times \text{(Entity)}_i  \\
+                   & \beta_2 \times \text{(Barley)}_i \\
+                   & \beta_3 \times \text{(Cocoa)}_i \\
+\end{aligned}
+$$
+Where $i = 1,...,n$ and $n = 440$.
+
+For the Year model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
+$$
+\begin{aligned}
+  \mbox{logit}(p_i) = & \beta_0 + \\ 
+                    & \beta_1 \times \text{I(Entity)}_i  \\
+                   & \beta_2 \times \text{(Wheat)}_i \\
+                   & \beta_3 \times \text{(Maize)}_i \\
+                   & \beta_4 \times \text{(Soybeans)}_i \\
+                   & \beta_5 \times \text{(Potatoes)}_i \\
+                   & \beta_6 \times \text{(Cassava)}_i \\
+                   & \beta_7 \times \text{(Barley)}_i \\
+                   & \beta_7 \times \text{(Cocoa)}_i \\
+\end{aligned}
+$$
+Where $i = 1,...,n$, $n = 440$ and I() in the equation indicates a dummy variable, taking value 1 when the condition is true and zero otherwise. 
+
+
+For the Arable Land model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
+$$
+\begin{aligned}
+  \mbox{logit}(p_i) = & \beta_0 + \\ 
+                    & \beta_1 \times \text{(Land)}_i  \\
+                   & \beta_2 \times \text{(Wheat)}_i \\
+                   & \beta_3 \times \text{(Maize)}_i \\
+                   & \beta_4 \times \text{(Potatoes)}_i \\
+                   & \beta_5 \times \text{(Cassava)}_i \\
+                   & \beta_6 \times \text{(Barley)}_i \\
+                   & \beta_7 \times \text{(Cocoa)}_i \\
+\end{aligned}
+$$
+Where $i = 1,...,n$ and $n = 440$.
+
+For the Crop model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
+$$
+\begin{aligned}
+  \mbox{logit}(p_i) = & \beta_0 + \\ 
+                   & \beta_1 \times \text{(Wheat)}_i \\
+                   & \beta_2 \times \text{(Maize)}_i \\
+                   & \beta_3 \times \text{(Soybeans)}_i \\
+                   & \beta_4 \times \text{(Potatoes)}_i \\
+                   & \beta_5 \times \text{(Cassava)}_i \\
+                   & \beta_6 \times \text{(Barley)}_i \\
+                   & \beta_7 \times \text{(Cocoa)}_i \\
+\end{aligned}
+$$
+Where $i = 1,...,n$ and $n = 440$.
+
+For the Fertilizer model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
+$$
+\begin{aligned}
+  \mbox{logit}(p_i) = & \beta_0 + \\ 
+                    & \beta_1 \times \text{(Fertilizer)}_i \\
+                   & \beta_2 \times \text{(Wheat)}_i \\
+                   & \beta_3 \times \text{(Rice)}_i \\
+                   & \beta_4 \times \text{(Maize)}_i \\
+                   & \beta_5 \times \text{(Soybeans)}_i \\
+                   & \beta_6 \times \text{(Potatoes)}_i \\
+                   & \beta_7 \times \text{(Beans)}_i \\
+                   & \beta_8 \times \text{(Cassava)}_i \\
+                   & \beta_9 \times \text{(Barley)}_i \\
+                   & \beta_10 \times \text{(Cocoa)}_i \\
+                   & \beta_11 \times \text{(Bananas)}_i \\
+\end{aligned}
+$$
+Where $i = 1,...,n$ and $n = 440$.
+
+```{r}
+## convert fertilizer to range from 1995 to 2014, remove all entities that are not regions, and correct spelling of countries for later use. Mutate the data to only contain relevant variables.
+fert <- fertilizer %>%
+  filter(Year %in% 1995:2014) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia"))
+fert <-  mutate(fert, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
+  group_by(Year, Entity) %>%
+  summarize(yield = `Cereal yield (tonnes per hectare)`, fertilizer = `Nitrogen fertilizer use (kilograms per hectare)`)
+```
+
+```{r}
+## convert arable_land, limit the years to 1995-2014, remove all entities that are not regions, correct country names, and remove irrelevant variables. 
+air <- arable_land %>%
+  filter(Year %in% 1995:2014) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Western Europe", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia")) %>%
+  group_by(Year, Entity) %>%
+  summarize(arable_land = `Arable land needed to produce a fixed quantity of crops ((1.0 = 1961))`, Year = Year, Entity = Entity)
+```
+
+```{r}
+## convert key_crop, limit the years to 1995-2014, remove all entities that are not regions, correct country names, and remove irrelevant variables.
+crop <- key_crop %>%
+  filter(Year %in% 1995:2014) %>%
+  filter(Entity %in% c("Africa", "Americas", "Asia", "Australia & New Zealand", "Caribbean", "Central America", "Eastern Africa", "Eastern Asia", "Eastern Europe", "Europe", "Europe, Western", "Micronesia (region)", "Middle Africa", "Northern Africa", "Northern America", "Oceania", "South America", "Southern Africa", "Southern Asia", "Southern Europe", "Western Africa", "Western Asia"))
+crop <-  mutate(crop, Entity = ifelse(Entity == "Europe, Western", "Western Europe", Entity)) %>%
+  group_by(Year, Entity) %>%
+  summarize(wheat = `Wheat (tonnes per hectare)`,
+            rice = `Rice (tonnes per hectare)`,
+            maize = `Maize (tonnes per hectare)`,
+            soybeans = `Soybeans (tonnes per hectare)`,
+            potatoes = `Potatoes (tonnes per hectare)`,
+            beans = `Beans (tonnes per hectare)`,
+            peas = `Peas (tonnes per hectare)`,
+            cassava = `Cassava (tonnes per hectare)`,
+            barley = `Barley (tonnes per hectare)`,
+            cocoa_beans = `Cocoa beans (tonnes per hectare)`,
+            bananas = `Bananas (tonnes per hectare)`)
+```
+
+```{r}
+## merge all separate datasets into one combined dataset. 
+df_crop = data.frame(Year = crop$Year, Entity = crop$Entity, wheat = crop$wheat, rice = crop$rice, maize = crop$maize, soybeans = crop$soybeans, potatoes = crop$potatoes, beans = crop$beans, peas = crop$peas, cassava = crop$cassava, barley = crop$barley, cocoa = crop$cocoa_beans, bananas = crop$bananas)
+df_fert = data.frame(Year = fert$Year, Entity = fert$Entity, fertilizer = fert$fertilizer, Yield = fert$yield)
+df_air = data.frame(Year = air$Year, Entity = air$Entity, land = air$arable_land)
+merged_data = full_join(df_crop, df_fert)
+merged_data = full_join(merged_data, df_air)
+```
+
+We also took a look at correlation between each of our variables and the yield. The resulting graphs and values showed an extreme amount of correlation between them all. There were a few instances of insignificant correlation, primarily cocoa beans when compared to all other variables, except against arable land, wheat, and bananas. 
+
+```{r}
+## Produce figures for Fertilizer
+fer1 = merged_data %>% summarise(fertilizer = fertilizer, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+corplot = ggpairs(fer1, cardinality_threshold = 24, progress = F)
+```
+
+```{r}
+#| label: fig-eda0
+#| fig-cap: "This graph shows and example of the correlation plot values, this particular one has the variables Fertilizer, Wheat, Rice, Maize, Soybeans, Potatoes, and Beans. Basically, all other cordinate plots look similiar to this one."
+#| fig-width: 6
+#| fig-height: 3
+#| fig-show: hold
+
+# Display the combined plot
+corplot
+```
+
+# Results
+
+#Individual Modeling
+
+Overall, we modeled yield as our response variable. We first started with individual variables to determine which might have the largest effect on crop yield. (Findings were excluded if they didn’t provide significant effects, i.e. p < 0.05.)
+
+# Year
+
+Modeling year as a factor variable, we found that a majority of years had significant effects on yield in the quasi-poisson model (negated 1998, 2000, 2005, 2006, 2013, 2014). We did find that the biggest increase in yield came in 2007 on a logistic scale — a change from 1995 to 2007 corresponds to a 1.108-multiplicative odds increase in crop yield. 2001 and 2003 follow closely behind, with 1.099 and 1.043-multiplicative odds increases in yield, respectively. There were no significant multiplicative-odds decreases.
+Entity
+
+# Entity
+
+We decided to not have a baseline for the model consisting solely of entity as the covariate — Africa would have been the baseline, but any other continent with respect to this simply didn’t make sense, and we were not getting any significant effects.
+
+Removing Africa as a baseline yielded significant effects for every region studied — this was one of just two models overall which we chose to stick with poisson models instead of quasi-poisson because the dispersion parameter was close enough to 1 that it didn’t really make a difference on estimates nor p-values.
+
+Micronesia yielded a 1.147-multiplicative-odds increase in crop yield (remember, there’s no baseline so it’s not exactly with respect to any other entity). How we interpreted this was it was simply increasing from zero.
+
+# Arable land
+
+With arable land, we also removed the baseline because it is difficult to determine what the baseline would even be — maybe non-arable land? When we removed this, we found that there was a significant effect and a 1.409-multiplicative-odds increase in crop yield.
+
+# Crops
+
+With each crop, we originally had a baseline, but, similarly to arable land, it was difficult to determine what that was. In addition, all the crops were giving us insignificant effects, leading us to determine removing the baseline was the best way to go. Again, these are just individual crops’ effects on yield, these are by no means our best models.
+
+We found that cocoa beans had the highest multiplicative-odds increase of 2.18. This makes sense because, as you will see in other models, this was part of our best crops model. Bananas, on the other hand, had the least positive multiplicative-odds increase, with just 0.036, on yield, which also makes sense because this fruit rarely appeared in any of our good models.
+
+
+# Interaction Effects
+
+
+# Entity*Year
+
+With Africa as a baseline, there was not a single significant effect. Removing the baseline of Africa did not change much for the interaction effects. There were still no significant effects among interactions — all the significant effects with the regular variables were described above.
+
+# Entity*wheat
+
+With respect to wheat produced in Africa as a baseline, we found that no positive odds increases with any interactions between wheat and another region. We did find that the biggest change was Western Africa  — a change from Africa to Western Africa produces a 0.709-multiplicative odds decrease in yield when only considering wheat as a crop. The region with the best log odds ratio, however, was Southern Africa, which, with respect to Africa, had a 0.269-multiplicative-odds decrease while producing wheat in overall crop yield.
+
+# Entity*rice
+
+With respect to rice produced in Africa as a baseline, we once again found that no positive odds increases with any interactions between rice and another region. The most significant log odds ratio change was a one-unit change in rice produced in the Caribbean corresponded to a 0.9745-multiplicative-odds decrease in yield. Perhaps it’s not really fair to compare anywhere to Africa in terms of rice production because it has been cultivated for several thousand years, but the Caribbean still produces a good amount of rice today.
+
+```{r}
+best_year <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
+fitted = best_year$fitted.values
+d = resid(best_year, type = "deviance")
+resid_df4 = data.frame(fitted = fitted, deviance = d)
+
+g1 = ggplot(resid_df4, aes(x = fitted, y = deviance)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Deviance residuals")
+
+g2 = ggplot(resid_df4, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
+```
+
+```{r}
+#| label: fig-eda2
+#| fig-cap: "The left graph shows the deviance residuals for Year vs. fitted values and the right shows the Q-Q Normal Plot of the deviance of Year."
+#| fig-width: 6
+#| fig-height: 3
+#| fig-show: hold
+
+# Display the combined plot
+grid.arrange(g1, g2, ncol = 2)
+```
+
+```{r}
+## Best fertilizer plots
+yield_glm2 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley+soybeans+potatoes+beans+cassava+ cocoa+bananas, family = "quasipoisson", data = merged_data)
+fitted = yield_glm2$fitted.values
+d = resid(yield_glm2, type = "deviance")
+resid_df2 = data.frame(fitted = fitted, deviance = d)
+
+g1 = ggplot(resid_df2, aes(x = fitted, y = deviance)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0, col = 2) + 
+  labs(title = "Deviance residuals")
+
+g2 = ggplot(resid_df2, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
+```
+
+```{r}
+#| label: fig-eda5
+#| fig-cap: "The left graph shows the deviance residuals for Fertilizer vs. fitted values and the right shows the Q-Q Normal Plot of the deviance of Fertilizer."
+#| fig-width: 6
+#| fig-height: 3
+#| fig-show: hold
+
+# Display the combined plot
+grid.arrange(g1, g2, ncol = 2)
+```
+
+The residual plot shows a few things about our model. The first thing to notice is that the values seem to have a constant dispersion meaning that we do have homoscedasticity. There are a few areas where the distribution is a little off of constant, but as a whole. There are, however, a few problems that need to be addressed with the residual plots. The first being a clear pattern in the residual plot, this shows that the relationship between variables and predictors are not linear, it can also mean that the data is not well modeled. Since this exact same pattern repeats over every graph, it seems that the relationship between variables and predictors is more likely than an unfit model. The final problem again occurs because of the bands seen in the plots, it also means that we have not effectively found the underlying cause of the relationship. While these do not bode well for our models, it is imperative for us to state that these graphs are an improvement from previous models we used. We used the Poisson distribution at first and found all the same problems as previously mentioned, but also the dispersion was not constant as well. In looking at these problems we changed to the Quasi-Poisson distribution which fixed our dispersion issue. The QQ-Plots for each model all can be safely assumed to have normal distributions. There are a couple of spots in the plot that trail off the main line a little bit, but generally they stay on the line.
+
+This is the best fitting model using Entity as one of the variables.
+```{r}
+#| label: model-summary-entity
+#| tbl-cap: "Logistic regression summary with Entity"
+
+best_entity <- glm(round(Yield) ~ Entity + barley + cocoa, data = merged_data, family = "quasipoisson")
+summ(best_entity, model.info = FALSE, model.fit = FALSE)
+```
+
+This model uses Year in the model with the best fitting variables to go with it.
+```{r}
+#| label: model-summary-year
+#| tbl-cap: "Logistic regression summary with Year"
+
+best_year <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
+summ(best_year, model.info = FALSE, model.fit = FALSE)
+```
+
+This is the best fitting model using Arable Land as one of the variables.
+```{r}
+#| label: model-summary-arable
+#| tbl-cap: "Logistic regression summary with Arable Land"
+
+best_air <- glm(round(Yield) ~ land + wheat + maize + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
+summ(best_air, model.info = FALSE, model.fit = FALSE)
+```
+
+This model uses Crops as the variables without any others, here is what fitetd the data the best.
+```{r}
+#| label: model-summary-crop
+#| tbl-cap: "Logistic regression summary with Crops"
+
+top_crops <- glm(round(Yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
+summ(top_crops, model.info = FALSE, model.fit = FALSE)
+```
+
+This is the best fitting model using Fertilizer as one of the variables.
+```{r}
+#| label: model-summary-fertilizer
+#| tbl-cap: "Logistic regression summary with Fertilizer"
+
+yield_glm2 = glm(round(Yield) ~  fertilizer+wheat+rice+maize+barley+soybeans+potatoes+beans+cassava+ cocoa+bananas, family = "quasipoisson", data = merged_data)
+summ(yield_glm2, model.info = FALSE, model.fit = FALSE)
+```
+
+
+In this section, discuss and interpret your results. Explain the implications and significance of your findings, and relate them to your research question and existing literature or theories.
+
+# Conclusion
+
+Throughout our analysis of the effects of different variables on the crop yield, we found that there is a high correlation between the interactions of entity, year, land, fertilizer, and the region. Year and fertilizer we found have the lowest correlation. Fertilizer having one of the lower correlations was surprising because our original thoughts were that land and fertilizer would have the greatest effects on the crop yield (both individually and for total cereal yield). However, our correlation plots did confirm our original question which was does the region and amount of arable land have a large impact on crop yield. Some factors that could also have an effect on the crop yield would be the weather of specific regions which is something our data did not provide. In future studies it would be beneficial to get weather data to look at that covariate alongside the arable land and region of where the crops are being grown and we believe that would have a more significant impact on each specific crop’s yield. Based on our findings, we can say that while fertilizer can be beneficial to crop yield, the biggest factors when considering where to grow certain crops heavily depends on the region, entity, and the amount of arable land available to produce the specified crops.
+
+### References
+
+::: {#refs}
+:::
+
+# Appendix (Optional)
+
+If you want to include your R code as an appendix, you can create a new code chunk and set `#| echo: true` to show the code and `#| eval: false` to avoid that to be run. You can also provide scripts separately as supplementary material.
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Your code here
+```
+
+
