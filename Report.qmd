@@ -479,6 +479,7 @@ summ(yield_glm2, model.info = FALSE, model.fit = FALSE)
 In this section, discuss and interpret your results. Explain the implications and significance of your findings, and relate them to your research question and existing literature or theories.
 
 # Conclusion
+
 ```{r}
 crops.anova <- glm(round(Yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa, data = merged_data, family = "quasipoisson")
 
@@ -490,7 +491,21 @@ entity.anova <- glm(round(Yield) ~ Entity + barley + cocoa, data = merged_data, 
 
 anova(crops.anova, air.anova, year.anova, entity.anova)
 ```
-Throughout our analysis of the effects of different variables on the crop yield, we found that there is a high correlation between the interactions of entity, year, land, fertilizer, and the region. Year and fertilizer we found have the lowest correlation. Fertilizer having one of the lower correlations was surprising because our original thoughts were that land and fertilizer would have the greatest effects on the crop yield (both individually and for total cereal yield). However, our correlation plots did confirm our original question which was does the region and amount of arable land have a large impact on crop yield. Some factors that could also have an effect on the crop yield would be the weather of specific regions which is something our data did not provide. In future studies it would be beneficial to get weather data to look at that covariate alongside the arable land and region of where the crops are being grown and we believe that would have a more significant impact on each specific crop’s yield. Based on our findings, we can say that while fertilizer can be beneficial to crop yield, the biggest factors when considering where to grow certain crops heavily depends on the region, entity, and the amount of arable land available to produce the specified crops.
+Throughout our analysis of the effects of different variables on the crop yield, we found that there is a high correlation between the interactions of entity, year, land, fertilizer, and the region. Year and fertilizer we found have the lowest correlation. Fertilizer having one of the lower correlations was surprising because our original thoughts were that land and fertilizer would have the greatest effects on the crop yield (both individually and for total cereal yield). However, our correlation plots did confirm our original question which was does the region and amount of arable land have a large impact on crop yield?
+
+Although we may have previously thought that all of our covariates would have a significantly high effect on crop yield, we were somewhat mistaken. The quasi-poisson distribution does not yield any AIC values because the distribution doesn’t depend on the same likelihood function as other distributions do. Therefore, before realizing that the quasi-poisson model yielded better results to us than the poisson model, we were using AIC values from the poisson model as a way to judge the best ones.
+
+We did find that based on our best models (which have been noted in our R chunks), arable land had the weakest relationship and effect on the yield — this somewhat makes sense relative to all the other covariates because we would intuitively imagine that year or region or crop helps give the best correlation to the yield.
+
+We can, in fact, see in our year vs. yield plots by entity, that there is a positive correlation in the logistic regression fitted line for almost every entity. Annual change over time notably distinguishes a positive correlation between the two variables, and this was consistent throughout almost all entities except a couple.
+
+Based on our best models, since we cannot use AIC to compare our models, we use the residual deviance as the next-best alternative to determine the best models. We find that our best entity model — with entity, barley and cocoa beans as covariates — was our best overall model to estimate crop yield, with a residual deviance of 9.0465. This fits perfectly with what we previously said about cocoa beans yielding the highest multiplicative-odds increase when doing individual modeling. Barley was also determined to be a good factor in modeling the highest change in yield — both of these crop covariates were in all of our best models.
+
+The next-best model we had was our year model, which had a residual deviance of 9.4761; followed by our best crops model: 10.5148 residual deviance; and followed by our best arable land model: 10.5235 residual deviance.
+
+Further deductions reveal that arable land, as we had concluded, was our worst predictor, followed by year. We can also deduce that no interaction effects is, a lot of the time, better than having interaction effects because this makes more parameters, increasing both the AIC and residual deviance.
+
+Some factors that could also have an effect on the crop yield would be the weather of specific regions, which is something our data did not provide. In future studies it would be beneficial to get weather data to look at that covariate alongside the arable land and region of where the crops are being grown. We believe that would have a more significant impact on each specific crop’s yield. Based on our findings, we can say that while fertilizer can be beneficial to crop yield, the biggest factors when considering where to grow certain crops heavily depends on the region/entity and the types of crops produced.
 
 ### References
 
