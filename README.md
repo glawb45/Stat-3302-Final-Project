@@ -94,3 +94,64 @@ ggplot(resid_df2, aes(x = fitted, y = deviance)) +
 
 ggplot(resid_df2, aes(sample = deviance)) +stat_qq() + stat_qq_line() + labs(x = "Theoretical Quantiles", y = "Sample Quantiles")
 ```
+
+```{r, warning = F}
+entity1 = merged_data %>% summarise(entity = Entity, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+plot1 = ggpairs(entity1, cardinality_threshold = 24, progress = F)
+
+entity2 = merged_data %>% summarise(entity = Entity, peas = peas, cassava = cassava, barley = barley, cocoa = cocoa, bananas = bananas)
+ggpairs(entity2, cardinality_threshold = 24, progress = F)
+
+```
+
+```{r, warning = F}
+year1 = merged_data %>% summarise(year = Year, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+ggpairs(year1, cardinality_threshold = 24, progress = F)
+
+year2 = merged_data %>% summarise(year = Year, peas = peas, cassava = cassava, barley = barley, cocoa = cocoa, bananas = bananas)
+ggpairs(year2, cardinality_threshold = 24, progress = F)
+```
+
+```{r, warning = F}
+fer1 = merged_data %>% summarise(fertilizer = fertilizer, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+ggpairs(fer1, cardinality_threshold = 24, progress = F)
+
+fer2 = merged_data %>% summarise(fertilizer = fertilizer, peas = peas, cassava = cassava, barley = barley, cocoa = cocoa, bananas = bananas)
+ggpairs(fer2, cardinality_threshold = 24, progress = F)
+```
+
+```{r, warning = F}
+yield1 = merged_data %>% summarise(yield = Yield, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+ggpairs(yield1, cardinality_threshold = 24, progress = F)
+
+yield2 = merged_data %>% summarise(yield = Yield, peas = peas, cassava = cassava, barley = barley, cocoa = cocoa, bananas = bananas)
+ggpairs(yield2, cardinality_threshold = 24, progress = F)
+```
+
+```{r, warning = F}
+land1 = merged_data %>% summarise(land = land, wheat = wheat, rice = rice, maize = maize, soybeans = soybeans, potatoes = potatoes, beans = beans)
+ggpairs(land1, cardinality_threshold = 24, progress = F)
+
+land2 = merged_data %>% summarise(land = land, peas = peas, cassava = cassava, barley = barley, cocoa = cocoa, bananas = bananas)
+ggpairs(land2, cardinality_threshold = 24, progress = F)
+```
+
+```{r, warning = F}
+main1 = merged_data %>% summarise(land = land, entity = Entity, year = Year, fertilizer = fertilizer, yield = Yield)
+ggpairs(main1, cardinality_threshold = 24, progress = F)
+```
+
+```{r, warning = F}
+crop1 = merged_data %>% summarise( peas = peas, cassava = cassava, barley = barley, soybeans = soybeans, potatoes = potatoes, beans = beans)
+ggpairs(crop1, cardinality_threshold = 24, progress = F)
+
+crop2 = merged_data %>% summarise( wheat = wheat, rice = rice, maize = maize, cocoa = cocoa, bananas = bananas)
+ggpairs(crop2, cardinality_threshold = 24, progress = F)
+
+crop3 = merged_data %>% summarise( peas = peas, cassava = cassava, barley = barley, wheat = wheat, rice = rice, maize = maize)
+ggpairs(crop3, cardinality_threshold = 24, progress = F)
+
+crop4 = merged_data %>% summarise(soybeans = soybeans, potatoes = potatoes, beans = beans, cocoa = cocoa, bananas = bananas)
+ggpairs(crop4, cardinality_threshold = 24, progress = F)
+```
+
