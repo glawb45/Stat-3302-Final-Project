@@ -481,6 +481,16 @@ In this section, discuss and interpret your results. Explain the implications an
 
 # Conclusion
 
+crops.anova <- glm(round(Yield) ~ wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+
+air.anova <- glm(round(Yield) ~ arable_land + wheat + maize + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+
+year.anova <- glm(round(Yield) ~ as.factor(Year) + wheat + maize + soybeans + potatoes + cassava + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+
+entity.anova <- glm(round(Yield) ~ Entity + barley + cocoa_beans, data = merged_data, family = "quasipoisson")
+
+anova(crops.anova, air.anova, year.anova, entity.anova)
+
 Throughout our analysis of the effects of different variables on the crop yield, we found that there is a high correlation between the interactions of entity, year, land, fertilizer, and the region. Year and fertilizer we found have the lowest correlation. Fertilizer having one of the lower correlations was surprising because our original thoughts were that land and fertilizer would have the greatest effects on the crop yield (both individually and for total cereal yield). However, our correlation plots did confirm our original question which was does the region and amount of arable land have a large impact on crop yield. Some factors that could also have an effect on the crop yield would be the weather of specific regions which is something our data did not provide. In future studies it would be beneficial to get weather data to look at that covariate alongside the arable land and region of where the crops are being grown and we believe that would have a more significant impact on each specific crop’s yield. Based on our findings, we can say that while fertilizer can be beneficial to crop yield, the biggest factors when considering where to grow certain crops heavily depends on the region, entity, and the amount of arable land available to produce the specified crops.
 
 ### References
