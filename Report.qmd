@@ -46,7 +46,7 @@ The data that we used was the Global Crop Yields from Our World In Data, through
 
 We decided to only focus on the first three datasets to cut down on the number of variables, then to clean the data further we filtered out the data to only include larger Entities, reducing our data to large regions/continents so we could use Entity as a categorical variable with a much smaller number of categories. Then after merging the filtered crop yields, arable land and fertilizer datasets we started looking at the year variable. Some Entities did not have values for certain years, so we had to limit our models to only use a certain range of years, where we settled on 1995-2014. There were still some Entities that did not have one specific type of crop, but these were ignored when we made the models.
 
-After cleaning the data, we classify our outcomes as the total yield of crops in kilograms per hectare and denote the observed values as yi where i = 1, …, n, n = 460. We then started searching for models using stepwise regression starting with the full model, removing some variables to minimize the AIC. At this point we split our focus to creating two models, one that focuses on the effects of arable land, Entity and specific crops over time on total yield, and another that looks at the effect of fertilizer on total yield.We also found that a quasi-poisson model was able to show us better models when looking at the residuals 
+After cleaning the data, we classify our outcomes as the total yield of crops in kilograms per hectare and denote the observed values as $y_i$ where i = 1, …, n, n = 440. We then started searching for models using stepwise regression starting with the full model, removing some variables to minimize the AIC. At this point we split our focus to creating two models, one that focuses on the effects of arable land, Entity and specific crops over time on total yield, and another that looks at the effect of fertilizer on total yield.We also found that a quasi-poisson model was able to show us better models when looking at the residuals 
 
 ```{r}
 #| label: reading_data
@@ -351,27 +351,27 @@ Most of these plots are fairly similar in their slope and correlation between yi
 
 Summary of interaction effects with entity and crops:
 
-Entity*wheat: A one-unit change in wheat produced in Western Africa with respect to wheat produced in Africa corresponds to a 0.709-multiplicative-odds decrease in crop yield.
+Entity interation with wheat: A one-unit change in wheat produced in Western Africa with respect to wheat produced in Africa corresponds to a 0.709-multiplicative-odds decrease in crop yield.
 
-Entity*rice: A one-unit change in rice produced in the Caribbean with respect to rice produced in Africa corresponds to a 0.9745-multiplicative-odds decrease in crop yield.
+Entity interation with rice: A one-unit change in rice produced in the Caribbean with respect to rice produced in Africa corresponds to a 0.9745-multiplicative-odds decrease in crop yield.
 
-Entity*maize: A one-unit change in maize produced in Australia & New Zealand with respect to maize produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity interation with maize: A one-unit change in maize produced in Australia & New Zealand with respect to maize produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
 
-Entity*soybeans: A one-unit change in soybeans produced in Asia with respect to soybeans produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
+Entity interation with soybeans: A one-unit change in soybeans produced in Asia with respect to soybeans produced in Africa corresponds to a 1.58-multiplicative-odds decrease in crop yield.
 
-Entity*potatoes: A one-unit change in potatoes produced in Oceania with respect to potatoes produced in Africa corresponds to a 0.184-multiplicative-odds decrease in crop yield.
+Entity interation with potatoes: A one-unit change in potatoes produced in Oceania with respect to potatoes produced in Africa corresponds to a 0.184-multiplicative-odds decrease in crop yield.
 
-Entity*beans: A one-unit change in beans produced in Australia & New Zealand or Oceania with respect to beans produced in Africa corresponds to a 3.26-multiplicative-odds decrease in crop yield.
+Entity interation with beans: A one-unit change in beans produced in Australia & New Zealand or Oceania with respect to beans produced in Africa corresponds to a 3.26-multiplicative-odds decrease in crop yield.
 
-Entity*peas: A one-unit change in peas produced in Europe with respect to peas produced in Africa corresponds to a 2.35-multiplicative-odds decrease in crop yield.
+Entity interation with peas: A one-unit change in peas produced in Europe with respect to peas produced in Africa corresponds to a 2.35-multiplicative-odds decrease in crop yield.
 
-Entity*cassava: A one-unit change in cassava produced in Northern Africa with respect to cassava produced in Africa corresponds to a 2.17-multiplicative-odds decrease in crop yield.
+Entity interation with cassava: A one-unit change in cassava produced in Northern Africa with respect to cassava produced in Africa corresponds to a 2.17-multiplicative-odds decrease in crop yield.
 
-Entity*barley: A one-unit change in barley produced in Western Africa with respect to barley produced in Africa corresponds to a 0.81-multiplicative-odds decrease in crop yield.
+Entity interation with barley: A one-unit change in barley produced in Western Africa with respect to barley produced in Africa corresponds to a 0.81-multiplicative-odds decrease in crop yield.
 
-Entity*cocoa_beans: A one-unit change in cocoa beans produced in Micronesia with respect to cocoa beans produced in Africa corresponds to a 15.56-multiplicative-odds decrease in crop yield.
+Entity interation with cocoa_beans: A one-unit change in cocoa beans produced in Micronesia with respect to cocoa beans produced in Africa corresponds to a 15.56-multiplicative-odds decrease in crop yield.
 
-Entity*bananas: A one-unit change in bananas produced in Europe with respect to bananas produced in Africa corresponds to a 0.198-multiplicative-odds decrease in crop yield.
+Entity interation with bananas: A one-unit change in bananas produced in Europe with respect to bananas produced in Africa corresponds to a 0.198-multiplicative-odds decrease in crop yield.
 
 # Year*Crop
 
