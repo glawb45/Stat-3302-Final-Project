@@ -57,80 +57,31 @@ arable_land <- readr::read_csv('https://raw.githubusercontent.com/rfordatascienc
 ```
 
 For the Entity model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
-$$
-\begin{aligned}
-  \mbox{logit}(p_i) = & \beta_0 + \\ 
-                    & \beta_1 \times \text{(Entity)}_i  \\
-                   & \beta_2 \times \text{(Barley)}_i \\
-                   & \beta_3 \times \text{(Cocoa)}_i \\
-\end{aligned}
-$$
+
+$\mbox{logit}(p_i)=\beta_0+\beta_1\text{(Entity)}_i+\beta_2\text{(Barley)}_i+\beta_3\text{(Cocoa)}_i$
 Where $i = 1,...,n$ and $n = 440$.
 
 For the Year model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
-$$
-\begin{aligned}
-  \mbox{logit}(p_i) = & \beta_0 + \\ 
-                    & \beta_1 \times \text{I(Entity)}_i  \\
-                   & \beta_2 \times \text{(Wheat)}_i \\
-                   & \beta_3 \times \text{(Maize)}_i \\
-                   & \beta_4 \times \text{(Soybeans)}_i \\
-                   & \beta_5 \times \text{(Potatoes)}_i \\
-                   & \beta_6 \times \text{(Cassava)}_i \\
-                   & \beta_7 \times \text{(Barley)}_i \\
-                   & \beta_7 \times \text{(Cocoa)}_i \\
-\end{aligned}
-$$
+
+$\mbox{logit}(p_i)=\beta_0+\beta_1\text{I(Year)}_i+\beta_2\text{(Wheat)}_i+\beta_3\text{(Maize)}_i+\beta_4\text{(Potatoes)}_i+\beta_5\text{(Cassava)}_i+\beta_6\text{(Barley)}_i+\beta_7\text{(Cocoa)}_i$
+
 Where $i = 1,...,n$, $n = 440$ and I() in the equation indicates a dummy variable, taking value 1 when the condition is true and zero otherwise. 
 
 
 For the Arable Land model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
-$$
-\begin{aligned}
-  \mbox{logit}(p_i) = & \beta_0 + \\ 
-                    & \beta_1 \times \text{(Land)}_i  \\
-                   & \beta_2 \times \text{(Wheat)}_i \\
-                   & \beta_3 \times \text{(Maize)}_i \\
-                   & \beta_4 \times \text{(Potatoes)}_i \\
-                   & \beta_5 \times \text{(Cassava)}_i \\
-                   & \beta_6 \times \text{(Barley)}_i \\
-                   & \beta_7 \times \text{(Cocoa)}_i \\
-\end{aligned}
-$$
+
+$\mbox{logit}(p_i)=\beta_0+\beta_1\text{(Land)}_i+\beta_2\text{(Wheat)}_i+\beta_3\text{(Maize)}_i+\beta_4\text{(Potatoes)}_i+\beta_5\text{(Cassava)}_i+\beta_6\text{(Barley)}_i+\beta_7\text{(Cocoa)}_i$
 Where $i = 1,...,n$ and $n = 440$.
 
 For the Crop model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
-$$
-\begin{aligned}
-  \mbox{logit}(p_i) = & \beta_0 + \\ 
-                   & \beta_1 \times \text{(Wheat)}_i \\
-                   & \beta_2 \times \text{(Maize)}_i \\
-                   & \beta_3 \times \text{(Soybeans)}_i \\
-                   & \beta_4 \times \text{(Potatoes)}_i \\
-                   & \beta_5 \times \text{(Cassava)}_i \\
-                   & \beta_6 \times \text{(Barley)}_i \\
-                   & \beta_7 \times \text{(Cocoa)}_i \\
-\end{aligned}
-$$
+
+$\mbox{logit}(p_i)=\beta_0+beta_1 \text{(Wheat)}_i+\beta_2+\text{(Maize)}_i+\beta_3 \text{(Soybeans)}_i +\beta_4 \text{(Potatoes)}_i +\beta_5 \text{(Cassava)}_i +\beta_6 \text{(Barley)}_i +\beta_7 \text{(Cocoa)}_i$ 
 Where $i = 1,...,n$ and $n = 440$.
 
 For the Fertilizer model we assumed that each $\mbox{logit}(p_i)$ is a realization of a random variables $Y_i$ ~ Quasi-Poisson($λ_i$) independently, and model the count of total yield using the following logistic regression with these variables:
-$$
-\begin{aligned}
-  \mbox{logit}(p_i) = & \beta_0 + \\ 
-                    & \beta_1 \times \text{(Fertilizer)}_i \\
-                   & \beta_2 \times \text{(Wheat)}_i \\
-                   & \beta_3 \times \text{(Rice)}_i \\
-                   & \beta_4 \times \text{(Maize)}_i \\
-                   & \beta_5 \times \text{(Soybeans)}_i \\
-                   & \beta_6 \times \text{(Potatoes)}_i \\
-                   & \beta_7 \times \text{(Beans)}_i \\
-                   & \beta_8 \times \text{(Cassava)}_i \\
-                   & \beta_9 \times \text{(Barley)}_i \\
-                   & \beta_{10} \times \text{(Cocoa)}_i \\
-                   & \beta_{11} \times \text{(Bananas)}_i \\
-\end{aligned}
-$$
+
+$\mbox{logit}(p_i)=\beta_0+\beta_1\text{(Fertilizer)}_i+\beta_2\text{(Wheat)}_i+\beta_3\text{(Rice)}_i+\beta_4\text{(Maize)}_i+\beta_5\text{(Soybeans)}_i+\beta_6\text{(Potatoes)}_i+\beta_7\text{(Beans)}_i+\beta_8\text{(Cassava)}_i+\beta_9\text{(Barley)}_i+\beta_{10}\text{(Cocoa)}_i+\beta_{11}\text{(Bananas)}_i$
+
 Where $i = 1,...,n$ and $n = 440$.
 
 ```{r}
